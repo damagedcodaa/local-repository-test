@@ -11,6 +11,7 @@
        <mvc:annotation-driven />
 
        <mvc:resources mapping="/resources/**" location="/resources/" />
+        <mvc:resources mapping="/bootstrap/**" location="/resources/" />
 
        <context:component-scan base-package="com.olav" />
 

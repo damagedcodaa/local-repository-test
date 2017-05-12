@@ -23,8 +23,8 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("userJSP", new User());
-        modelAndView.setViewName("index");
+//        modelAndView.addObject("userJSP", new User());
+        modelAndView.setViewName("new_index");
         return modelAndView;
     }
 
@@ -52,14 +52,6 @@ public class MainController {
 
         dep1.setTitle("Department N1");
 
-//        Employee emp1 = new Employee();
-//        emp1.setName("Petr");
-//        emp1.setSurname("Sidorov");
-//
-//        Employee emp2 = new Employee();
-//        emp2.setName("Sergey");
-//        emp2.setSurname("Ivanov");
-
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
@@ -67,10 +59,6 @@ public class MainController {
         for (Employee emp : employeeDAO.getAllEmployees()) {
             dep1.getEmployees().add(emp);
         }
-
-//            dep1.getEmployees().add(emp1);
-//        dep1.getEmployees().add(emp2);
-
         modelAndView.addObject("dep1", dep1);
 
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
