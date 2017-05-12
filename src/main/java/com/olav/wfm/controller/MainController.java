@@ -1,8 +1,11 @@
 package com.olav.wfm.controller;
 
+import com.olav.wfm.dao.EmployeeDAO;
 import com.olav.wfm.model.Department;
 import com.olav.wfm.model.Employee;
 import com.olav.wfm.model.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,19 +52,26 @@ public class MainController {
 
         dep1.setTitle("Department N1");
 
-        Employee emp1 = new Employee();
-        emp1.setName("Petr");
-        emp1.setSurname("Sidorov");
+//        Employee emp1 = new Employee();
+//        emp1.setName("Petr");
+//        emp1.setSurname("Sidorov");
+//
+//        Employee emp2 = new Employee();
+//        emp2.setName("Sergey");
+//        emp2.setSurname("Ivanov");
 
-        Employee emp2 = new Employee();
-        emp2.setName("Sergey");
-        emp2.setSurname("Ivanov");
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        dep1.getEmployees().add(emp1);
-        dep1.getEmployees().add(emp2);
+        EmployeeDAO employeeDAO = (EmployeeDAO) context.getBean("employeeDAO");
+        for (Employee emp : employeeDAO.getAllEmployees()) {
+            dep1.getEmployees().add(emp);
+        }
+
+//            dep1.getEmployees().add(emp1);
+//        dep1.getEmployees().add(emp2);
 
         modelAndView.addObject("dep1", dep1);
-//        modelAndView.addObject("dep1", dep1.getEmployees());
 
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
     }

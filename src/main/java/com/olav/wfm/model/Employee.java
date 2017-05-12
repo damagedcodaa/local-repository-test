@@ -15,6 +15,15 @@ public class Employee {
 
     List<Skill> skillset;
 
+    public Employee() {
+        
+    }
+
+    public Employee(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getName() {
         return name;
     }
