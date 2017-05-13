@@ -16,6 +16,15 @@ public class ResourceGroup {
     List<Skill> skillSet; //aggregate from all positions
     List<Position> positions;
 
+    public ResourceGroup() {
+
+    }
+
+    public ResourceGroup(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
