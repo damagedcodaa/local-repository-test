@@ -1,9 +1,7 @@
 package com.olav.wfm.controller;
 
-import com.olav.wfm.dao.EmployeeDAO;
 import com.olav.wfm.dao.ResourceGroupDAO;
 import com.olav.wfm.model.Department;
-import com.olav.wfm.model.Employee;
 import com.olav.wfm.model.ResourceGroup;
 import com.olav.wfm.model.User;
 import org.springframework.context.ApplicationContext;
@@ -44,6 +42,13 @@ public class MainController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/serving-areas")
+    public ModelAndView showServingAreas() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("servingAreas");
+        return modelAndView;
+    }
+
     /*как только на index.jsp подтвердится форма
    <spring:form method="post"  modelAttribute="userJSP" action="check-user">,
    то попадем вот сюда
@@ -61,21 +66,21 @@ public class MainController {
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
     }
 
-    @RequestMapping(value = "/show-departments")
+    @RequestMapping(value = "/departments")
     public ModelAndView showDepartment(@ModelAttribute("dep1") Department dep1) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("departments");
 
-        dep1.setTitle("Department N1");
-
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
-
-        EmployeeDAO employeeDAO = (EmployeeDAO) context.getBean("employeeDAO");
-        for (Employee emp : employeeDAO.getAllEmployees()) {
-            dep1.getEmployees().add(emp);
-        }
-        modelAndView.addObject("dep1", dep1);
+//        dep1.setTitle("Department N1");
+//
+//        ApplicationContext context =
+//                new ClassPathXmlApplicationContext("applicationContext.xml");
+//
+//        EmployeeDAO employeeDAO = (EmployeeDAO) context.getBean("employeeDAO");
+//        for (Employee emp : employeeDAO.getAllEmployees()) {
+//            dep1.getEmployees().add(emp);
+//        }
+//        modelAndView.addObject("dep1", dep1);
 
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
     }

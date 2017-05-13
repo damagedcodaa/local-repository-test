@@ -1,9 +1,8 @@
-<%@ page import="com.olav.wfm.model.Employee" %>
 <%--
   Created by IntelliJ IDEA.
   User: Olga A
-  Date: 11.05.2017
-  Time: 21:05
+  Date: 13.05.2017
+  Time: 13:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,12 +21,12 @@
   <div class="col-md-8">
     <ul class="nav nav-tabs">
       <li><a href="/">Resource Groups</a></li>
-      <li><a href="/serving-areas">Serving Areas</a></li>
-      <li class="active"><a href="/departments">Departments</a></li>
+      <li class="active"><a href="#">Serving Areas</a></li>
+      <li><a href="/departments">Departments</a></li>
       <li><a href="#">Menu 3</a></li>
     </ul>
     <br />
-    Departments
+    Serving Areas
   </div>
 </div>
 </body>
