@@ -1,7 +1,7 @@
 package com.olav.wfm.dao.impl;
 
-import com.olav.wfm.dao.ResourceGroupDAO;
-import com.olav.wfm.model.ResourceGroup;
+import com.olav.wfm.dao.ServingAreaDAO;
+import com.olav.wfm.model.ServingArea;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Olga A on 13.05.2017.
  */
-public class JdbcResourceGroupDAO implements ResourceGroupDAO {
+public class JdbcServingAreaDAO implements ServingAreaDAO {
 
     private DataSource dataSource;
 
@@ -22,12 +22,12 @@ public class JdbcResourceGroupDAO implements ResourceGroupDAO {
         this.dataSource = dataSource;
     }
 
-    public void insert(ResourceGroup resourceGroup) {
+    public void insert(ServingArea servingArea) {
 
     }
 
-    public List<ResourceGroup> getAllResourceGroups() {
-        String sql = "SELECT * FROM RESOURCE_GROUPS";
+    public List<ServingArea> getAllServingAreas() {
+        String sql = "SELECT * FROM SERVING_AREAS";
 
         Connection conn = null;
 
@@ -35,19 +35,19 @@ public class JdbcResourceGroupDAO implements ResourceGroupDAO {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            List<ResourceGroup> resourceGroupList = new ArrayList<ResourceGroup>();
+            List<ServingArea> servingAreaList = new ArrayList<ServingArea>();
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                resourceGroupList.add(new ResourceGroup(
-                        rs.getString("resource_group_name"),
+                servingAreaList.add(new ServingArea(
+                        rs.getString("serving_area_name"),
                         rs.getString("description")
                 ));
 //                System.out.println(rs.getString("resource_group_name") + ", " + rs.getString("description"));
             }
             rs.close();
             ps.close();
-            return resourceGroupList;
+            return servingAreaList;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

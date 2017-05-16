@@ -1,8 +1,8 @@
 package com.olav.wfm.controller;
 
 import com.olav.wfm.dao.ResourceGroupDAO;
+import com.olav.wfm.dao.ServingAreaDAO;
 import com.olav.wfm.model.Department;
-import com.olav.wfm.model.ResourceGroup;
 import com.olav.wfm.model.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * Created by Olga A on 10.05.2017.
@@ -30,15 +28,21 @@ public class MainController {
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
         ResourceGroupDAO resourceGroupDAO = (ResourceGroupDAO) context.getBean("resourceGroupDAO");
+        modelAndView.addObject("resourceGroupList", resourceGroupDAO.getAllResourceGroups());
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
 
-        List<ResourceGroup> rs_list =  resourceGroupDAO.getAllResourceGroups();
-        System.out.println("list = " + rs_list);
-        System.out.println("list1 = " + rs_list.get(0).getName());
-        System.out.println("list2 = " + rs_list.get(1).getName());
-        System.out.println("list3 = " + rs_list.get(2).getName());
+    @RequestMapping(value = "/create-resource-group", method = RequestMethod.GET)
+    public ModelAndView createResourceGroup() {
+        ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.addObject("resourceGroupList", rs_list);
-        modelAndView.setViewName("new_index");
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        ServingAreaDAO servingAreaDAO = (ServingAreaDAO) context.getBean("servingAreaDAO");
+        modelAndView.addObject("servingAreaList", servingAreaDAO.getAllServingAreas());
+        modelAndView.setViewName("createResourceGroup");
         return modelAndView;
     }
 
@@ -49,7 +53,7 @@ public class MainController {
         return modelAndView;
     }
 
-    /*как только на index.jsp подтвердится форма
+    /*как только на index_old.jsp подтвердится форма
    <spring:form method="post"  modelAttribute="userJSP" action="check-user">,
    то попадем вот сюда
     */
@@ -83,6 +87,13 @@ public class MainController {
 //        modelAndView.addObject("dep1", dep1);
 
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
+    }
+
+    @RequestMapping(value = "/main")
+    public ModelAndView showMain() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("main");
+        return modelAndView;
     }
 
 
